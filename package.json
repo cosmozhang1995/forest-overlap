@@ -1,0 +1,22 @@
+{
+  "name": "forest-overlap",
+  "version": "0.0.0",
+  "description": "A tool to calculate ecology niche advantages and overlap.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cosmozhang1995/forest-overlap.git"
+  },
+  "dependencies": {
+    "node-xlsx": "*"
+  },
+  "author": "Cosmo Zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cosmozhang1995/forest-overlap/issues"
+  },
+  "homepage": "https://github.com/cosmozhang1995/forest-overlap"
+}
