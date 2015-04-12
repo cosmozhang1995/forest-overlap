@@ -32,6 +32,7 @@ var makeZeroArray = function(len) {
 };
 
 var util = {
+	xlsx: xlsx,
 	readData: function(data, names, advantages) {
 		var records = {},
 			cols = names.length,
