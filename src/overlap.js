@@ -45,7 +45,7 @@ var util = {
 				if (typeof name != "string") continue;
 				var advantage = parseFloat(row[advantages[c]]);
 				if (isNaN(advantage)) continue;
-				if (!records[name]) records[name] = util.makeZeroArray(cols);
+				if (!records[name]) records[name] = makeZeroArray(cols);
 				records[name][c] = advantage;
 			}
 		}
