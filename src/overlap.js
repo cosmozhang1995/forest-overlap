@@ -31,8 +31,9 @@ var calcLevinsWidth = function(adv) {
 		sumadv += adv[i];
 	}
 	for (var i = 0; i < r; i++) {
-		var advp = adv[i]/sumadv;
-		sigma += advp * Math.log(advp);
+		var advp = adv[i]/sumadv,
+			_ans = advp * Math.log(advp);
+		sigma += isNaN(_ans) ? 0 : _ans;
 	}
 	return -sigma;
 };
@@ -114,6 +115,34 @@ var util = {
 			}
 		}
 		return matric;
+	},
+
+	formStatisticsTable: function(statistics, options) {
+		// options:
+		// -- header_row
+		// -- sortby
+		options = options || {};
+		var tableData = [
+			options.header_row || ['物种', 'Levins宽度', 'Hurlbert宽度']
+		];
+		var _statistics = statistics;
+		if (options.sortby) {
+			_statistics = statistics.sort(function(a,b) {
+				return b[options.sortby] - a[options.sortby];
+			});
+		}
+		for (var i = 0; i < _statistics.length; i++) {
+			var item = _statistics[i];
+			// if (isNaN(item.levinsWidth) ||  
+			// 	isNaN(item.hurlbertWidth)) 
+			// 	continue;
+			tableData.push([
+				item.name,
+				item.levinsWidth,
+				item.hurlbertWidth
+			]);
+		}
+		return tableData;
 	},
 
 	formOverlapTable: function(matric) {
