@@ -25,6 +25,30 @@ var calcOverlap = function(adv1, adv2) {
 	return _molecule / Math.sqrt(_denominator1*_denominator2);
 };
 
+var calcLevinsWidth = function(adv) {
+	var sigma = 0, sumadv = 0, r = adv.length;
+	for (var i = 0; i < r; i++) {
+		sumadv += adv[i];
+	}
+	for (var i = 0; i < r; i++) {
+		var advp = adv[i]/sumadv;
+		sigma += advp * Math.log(advp);
+	}
+	return -sigma;
+};
+
+var calcHurlbertWidth = function(adv) {
+	var sigma = 0, sigmap2 = 0, sumadv = 0, r = adv.length;
+	for (var i = 0; i < r; i++) {
+		sumadv += adv[i];
+	}
+	for (var i = 0; i < r; i++) {
+		var advp = adv[i]/sumadv;
+		sigmap2 += advp * advp;
+	}
+	return (1/sigmap2 - 1) / (r - 1);
+};
+
 var makeZeroArray = function(len) {
 	var _ret = [];
 	for (var i = 0; i < len; i++) _ret.push(0);
@@ -67,7 +91,9 @@ var util = {
 			var advantages = records[k];
 			arr.push({
 				name: k,
-				adv: sum(advantages)
+				adv: sum(advantages),
+				levinsWidth: calcLevinsWidth(advantages),
+				hurlbertWidth: calcHurlbertWidth(advantages)
 			});
 		}
 		arr = arr.sort(function(a,b) {
